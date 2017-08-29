@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-
+from django.shortcuts import redirect
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^baemin/', include('baemin.urls', namespace='baemin')),
+    url(r'^$', lambda r: redirect('baemin:index'), name='root'), #최상위에서 바로 배민페이지로 가도록 구현
 ]
