@@ -2,7 +2,7 @@
 
 {% block content %}
   <h3> 배민 메인 페이지 "baemin.index.html" </h3>
-  <table>
+  <table class="table table-bordered table-hover">
     <thead>
       <tr>
         <th>가게명</th>
@@ -17,7 +17,7 @@
           <td>{{ shop.name }}</td>
           <td>{{ shop.tel }}</td>
           <td>{{ shop.addr }}</td>
-          <td><a href="#">주문하기</a></td>
+          <td><a href="{% url "baemin:order_new" shop.id %}" class="btn btn-primary">주문하기</a></td>
         </tr>
       {% endfor %}
     </tbody>

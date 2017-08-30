@@ -9,6 +9,8 @@ class Shop(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ('-id',)
 
 class Item(models.Model):
     shop=models.ForeignKey(Shop)
@@ -17,8 +19,18 @@ class Item(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ('-id',)
+
 class Order(models.Model):
     shop=models.ForeignKey(Shop)
     user=models.ForeignKey(settings.AUTH_USER_MODEL)
     item_set=models.ManyToManyField(Item)
     created_at=models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-id',)
+
+    @property
+    def total(self):
+        return sum(item.price for item in self.item_set.all())
